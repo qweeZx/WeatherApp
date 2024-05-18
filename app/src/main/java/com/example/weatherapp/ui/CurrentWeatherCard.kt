@@ -1,8 +1,8 @@
 package com.example.weatherapp.ui
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,8 +11,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -41,15 +39,15 @@ fun CurrentWeatherCard(
             verticalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(8.dp)
         ){
-            Row(
-                horizontalArrangement = Arrangement.SpaceAround,
+            Box(
                 modifier = Modifier
                     .fillMaxWidth()
-            ) {
-                Text(text = uiState.currentDate)
-                Text(text = uiState.dayOfWeek)
-                Text(text = uiState.currentTime)
+            ){
+                Text(text = uiState.currentDate, modifier = Modifier.align(Alignment.CenterStart))
+                Text(text = uiState.dayOfWeek, modifier = Modifier.align(Alignment.Center))
+                Text(text = uiState.currentTime, modifier = Modifier.align(Alignment.CenterEnd))
             }
             Text(
                 text = stringResource(R.string.current_temp_degrees_celsius, uiState.currentTemperature),

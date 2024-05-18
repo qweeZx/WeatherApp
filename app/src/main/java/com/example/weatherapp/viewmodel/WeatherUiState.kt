@@ -1,6 +1,7 @@
 package com.example.weatherapp.viewmodel
 
 data class WeatherUiState(
+    val location: String = "London",
     val currentTemperature: Int = 0,
     val currentDate: String = "22 may",
     val currentTime: String = "22:00",

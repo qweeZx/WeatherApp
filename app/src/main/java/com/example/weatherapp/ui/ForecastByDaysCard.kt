@@ -2,7 +2,6 @@ package com.example.weatherapp.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
@@ -13,7 +12,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -40,11 +38,14 @@ fun ForecastByDaysCard(
     ) {
         Column (
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceAround,
+            verticalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier
-                .weight(1f)
+                .align(Alignment.CenterHorizontally)
         ){
-            Text(text = uiState.dayOfWeek)
+            Text(
+                text = uiState.dayOfWeek,
+                fontSize = 16.sp
+            )
             Text(
                 text = uiState.date,
                 fontSize = 8.sp
@@ -53,7 +54,7 @@ fun ForecastByDaysCard(
                 text = stringResource(
                     R.string.max_min_temp_degrees_celsius,
                     uiState.maxTemp, uiState.minTemp),
-                fontSize = 20.sp
+                fontSize = 16.sp
             )
             Text(
                 text = uiState.condition,
@@ -69,8 +70,7 @@ fun ForecastByDaysList(
     forecastList: List<ForecastByDayUiState>
 ) {
     LazyRow (
-        modifier = modifier,
-        contentPadding = PaddingValues(horizontal = 4.dp)
+        modifier = modifier
     ){
         items (forecastList) {
             ForecastByDaysCard(uiState = it)
