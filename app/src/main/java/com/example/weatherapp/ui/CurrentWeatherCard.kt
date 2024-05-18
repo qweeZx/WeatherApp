@@ -28,7 +28,7 @@ import com.example.weatherapp.viewmodel.WeatherViewModel
 @Composable
 fun CurrentWeatherCard(
     modifier: Modifier = Modifier,
-    uiState: State<WeatherUiState>
+    uiState: WeatherUiState
 ) {
     Card(
         modifier = modifier
@@ -47,14 +47,14 @@ fun CurrentWeatherCard(
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                Text(text = uiState.value.currentDate)
-                Text(text = "Sunday")
-                Text(text = uiState.value.currentTime)
+                Text(text = uiState.currentDate)
+                Text(text = uiState.dayOfWeek)
+                Text(text = uiState.currentTime)
             }
             Text(
-                text = stringResource(R.string.current_temp_degrees_celsius, uiState.value.currentTemperature),
+                text = stringResource(R.string.current_temp_degrees_celsius, uiState.currentTemperature),
                 fontSize = 40.sp)
-            Text(text = uiState.value.currentCondition)
+            Text(text = uiState.currentCondition)
         }
     }
 }
@@ -63,7 +63,7 @@ fun CurrentWeatherCard(
 @Composable
 private fun CurrentWeatherCardPreview() {
     val viewModel: WeatherViewModel = viewModel()
-    val uiState = viewModel.uiState.collectAsState()
+    val uiState = viewModel.uiState
     WeatherAppTheme {
         Surface {
             CurrentWeatherCard(uiState = uiState)

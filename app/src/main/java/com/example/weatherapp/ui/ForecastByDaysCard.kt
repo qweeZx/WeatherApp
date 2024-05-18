@@ -2,8 +2,11 @@ package com.example.weatherapp.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -31,7 +34,7 @@ fun ForecastByDaysCard(
     Card(
         modifier = modifier
             .size(width = 80.dp, height = 100.dp)
-            .padding(horizontal = 8.dp, vertical = 4.dp),
+            .padding(horizontal = 4.dp, vertical = 4.dp),
         shape = RoundedCornerShape(10.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 10.dp)
     ) {
@@ -60,11 +63,38 @@ fun ForecastByDaysCard(
     }
 }
 
+@Composable
+fun ForecastByDaysList(
+    modifier: Modifier = Modifier,
+    forecastList: List<ForecastByDayUiState>
+) {
+    LazyRow (
+        modifier = modifier,
+        contentPadding = PaddingValues(horizontal = 4.dp)
+    ){
+        items (forecastList) {
+            ForecastByDaysCard(uiState = it)
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun ForecastByDaysListPreview() {
+    val viewModel: WeatherViewModel = viewModel()
+    val forecastList = viewModel.uiState.forecastByDays
+    WeatherAppTheme {
+        Surface {
+            ForecastByDaysList(forecastList = forecastList)
+        }
+    }
+}
+
 @Preview
 @Composable
 private fun ForecastByDaysCardPreview() {
     val viewModel: WeatherViewModel = viewModel()
-    val uiState = viewModel.uiState.collectAsState().value.forecastByDays[0]
+    val uiState = viewModel.uiState.forecastByDays[0]
     WeatherAppTheme {
         Surface {
             ForecastByDaysCard(uiState = uiState)

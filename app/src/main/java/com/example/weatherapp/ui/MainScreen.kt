@@ -16,17 +16,13 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 fun MainScreen(
     viewModel: WeatherViewModel = viewModel()
 ) {
-    val uiState = viewModel.uiState.collectAsState()
+    val uiState = viewModel.uiState
     WeatherAppTheme {
         Surface {
             Column {
                 Text(text = "header")
                 CurrentWeatherCard(uiState = uiState)
-                LazyRow {
-                    items(uiState.value.forecastByDays){
-                        ForecastByDaysCard(uiState = it)
-                    }
-                }
+                ForecastByDaysList(forecastList = uiState.forecastByDays)
             }
         }
     }
