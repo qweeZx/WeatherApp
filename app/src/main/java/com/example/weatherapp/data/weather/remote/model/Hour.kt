@@ -15,7 +15,7 @@ data class Hour (
   @SerializedName("wind_kph"       ) var windKph      : Double?    = null,
   @SerializedName("wind_degree"    ) var windDegree   : Int?       = null,
   @SerializedName("wind_dir"       ) var windDir      : String?    = null,
-  @SerializedName("pressure_mb"    ) var pressureMb   : Int?       = null,
+  @SerializedName("pressure_mb"    ) var pressureMb   : Double?       = null,
   @SerializedName("pressure_in"    ) var pressureIn   : Double?    = null,
   @SerializedName("precip_mm"      ) var precipMm     : Double?       = null,
   @SerializedName("precip_in"      ) var precipIn     : Double?       = null,
@@ -38,6 +38,6 @@ data class Hour (
   @SerializedName("vis_miles"      ) var visMiles     : Double?       = null,
   @SerializedName("gust_mph"       ) var gustMph      : Double?    = null,
   @SerializedName("gust_kph"       ) var gustKph      : Double?    = null,
-  @SerializedName("uv"             ) var uv           : Int?       = null
+  @SerializedName("uv"             ) var uv           : Double?       = null
 
 )

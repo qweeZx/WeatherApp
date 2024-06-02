@@ -27,7 +27,8 @@ class WeatherViewModel: ViewModel() {
                 var date = SimpleDateFormat("yyyy-MM-dd hh:mm", Locale.ENGLISH).parse(dateString)
                 var dayOfWeek = SimpleDateFormat("EEEE", Locale.ENGLISH).format(date!!)
                 uiState = WeatherUiState(
-                    currentTemperature = weather.current?.tempC!!,
+                    location = weather.location?.name!!,
+                    currentTemperature = weather.current?.tempC!!.toInt(),
                     currentDate = weather.location?.localtime!!.dropLast(5),
                     currentTime = weather.location?.localtime!!.drop(11),
                     currentCondition = weather.current?.condition?.text!!,
