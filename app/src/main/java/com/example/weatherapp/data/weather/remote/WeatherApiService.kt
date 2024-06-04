@@ -1,4 +1,4 @@
-package com.example.weatherapp.data.weather.remote.network
+package com.example.weatherapp.data.weather.remote
 
 import com.example.weatherapp.data.weather.remote.model.Weather
 import retrofit2.Retrofit

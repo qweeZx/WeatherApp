@@ -7,6 +7,11 @@ import androidx.room.PrimaryKey
 @Entity(
     tableName = "current_weather",
     foreignKeys = [
+        ForeignKey(
+            entity = City::class,
+            parentColumns = ["id"],
+            childColumns = ["id"]
+        )
     ]
 )
 data class CurrentWeather(

@@ -1,24 +1,40 @@
 package com.example.weatherapp.viewmodel
 
+import android.app.Application
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.weatherapp.data.weather.remote.network.WeatherApi
+import com.example.weatherapp.data.weather.WeatherRepository
+import com.example.weatherapp.data.weather.local.tables.City
+import com.example.weatherapp.data.weather.remote.WeatherApi
 import kotlinx.coroutines.launch
 import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class WeatherViewModel: ViewModel() {
+class WeatherViewModel(application: Application): ViewModel() {
     var uiState by mutableStateOf(WeatherUiState())
         private set
 
+    private val weatherRepository: WeatherRepository
+
     init {
+        Log.d("mytag", "1")
+        weatherRepository = WeatherRepository(application)
+        Log.d("mytag", "2")
         updateWeather()
+        Log.d("mytag", "3")
     }
+
+    fun addCity(city: String){
+        viewModelScope.launch {
+            weatherRepository.addCity(city)
+        }
+    }
+
     fun updateWeather(){
         viewModelScope.launch {
             try {
